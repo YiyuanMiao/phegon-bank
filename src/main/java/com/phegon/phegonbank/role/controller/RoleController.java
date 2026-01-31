@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/roles")
 @RequiredArgsConstructor
-@PreAuthorize("hasAuthority('ADMIN')")//only admin has access to controller
+//@PreAuthorize("hasAuthority('ADMIN')")//only admin has access to controller
 public class RoleController {
 
     private final RoleService roleService;

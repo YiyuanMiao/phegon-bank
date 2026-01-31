@@ -20,7 +20,7 @@ import java.util.List;
 @Entity
 @Data
 @Builder
-@Table(name="users")
+@Table(name="transactions")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Transaction {
