@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 
-public class TranscationRequest {
+public class TransactionRequest {
     private TransactionType transactionType;
     private BigDecimal amount;
     private String accountNumber;
