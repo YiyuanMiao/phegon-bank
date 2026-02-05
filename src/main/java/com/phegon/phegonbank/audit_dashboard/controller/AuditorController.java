@@ -36,13 +36,14 @@ public class AuditorController {
         return userDTO.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('AUDITOR') or hasAuthority('CUSTOMER')")
     @GetMapping("/accounts")
     public ResponseEntity<AccountDTO> findAccountDetailsByAccountNumber(@RequestParam String accountNumber) {
         Optional<AccountDTO> accountDTO = auditorService.findAccountDetailsByAccountNumber(accountNumber);
         return accountDTO.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/transactions")
+    @GetMapping("/transactions/by-account")
     public ResponseEntity<List<TransactionDTO>> findTransactionsByAccountNumber(@RequestParam String accountNumber) {
         List<TransactionDTO> transactionDTOs = auditorService.findTransactionsByAccountNumber(accountNumber);
         if (transactionDTOs.isEmpty()) {

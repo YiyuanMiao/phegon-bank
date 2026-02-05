@@ -17,30 +17,29 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 @RequestMapping("/api/users")
 public class UserController {
-    private final UserService
-            userService;
+    private final UserService userService;
+
     @GetMapping("/register")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Response<Page<UserDTO>>> getAllUsers(@RequestParam(defaultValue = "0") int page,
-                                                               @RequestParam(defaultValue = "50") int size){
+            @RequestParam(defaultValue = "50") int size) {
         return ResponseEntity.ok(userService.getAllUsers(page, size));
     }
 
     @GetMapping("/me")
-    public ResponseEntity<Response<UserDTO>> getCurrentUser(){
+    public ResponseEntity<Response<UserDTO>> getCurrentUser() {
         return ResponseEntity.ok(userService.getMyProfile());
     }
 
     @PutMapping("/update-password")
-    public ResponseEntity<Response<?>> updatePassword(@RequestBody @Valid UpdatePasswordRequest updatePasswordRequest){
+    public ResponseEntity<Response<?>> updatePassword(@RequestBody @Valid UpdatePasswordRequest updatePasswordRequest) {
         return ResponseEntity.ok(userService.updatePassword(updatePasswordRequest));
     }
 
     @PutMapping("/profile-picture")
-    public ResponseEntity<Response<?>> updateProfilePicture(@RequestParam("file") MultipartFile file){
-        return ResponseEntity.ok(userService.uploadProfilePicture(file));
+    public ResponseEntity<Response<?>> uploadProfilePictureToS3(@RequestParam("file") MultipartFile file) {
+        System.out.println(">>> uploadProfilePicture HIT");
+        return ResponseEntity.ok(userService.uploadProfilePictureToS3(file));
     }
-
-
 
 }

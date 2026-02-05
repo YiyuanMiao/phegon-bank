@@ -154,6 +154,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    @Transactional
     public Response<?> forgetPassword(String email) {
         User user = userRepo.findByEmail(email).orElseThrow(()->new NotFoundException("User Not Found"));
         passWordResetCodeRepo.deleteByUserId(user.getId());

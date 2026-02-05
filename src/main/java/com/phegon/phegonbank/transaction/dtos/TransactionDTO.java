@@ -1,7 +1,7 @@
 package com.phegon.phegonbank.transaction.dtos;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.phegon.phegonbank.account.dtos.AccountDTO;
@@ -22,9 +22,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-//encountering profilePictureUrl ,which is empty, leave it empty instead of making it null
+// encountering profilePictureUrl ,which is empty, leave it empty instead of
+// making it null
 @JsonIgnoreProperties(ignoreUnknown = true)
-//when using UserDTO as an object to receive a new user, it'll omit fields which do not have value
+// when using UserDTO as an object to receive a new user, it'll omit fields
+// which do not have value
 public class TransactionDTO {
 
     private Long id;
@@ -39,12 +41,12 @@ public class TransactionDTO {
 
     private TransactionStatus transactionStatus;
 
-    @JsonBackReference
+    @JsonBackReference("account-transactions")
+    //@JsonIgnore
     private AccountDTO account;
 
     // for transfer
     private String sourceAccount;
     private String destinationAccount;
-
 
 }

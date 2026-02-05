@@ -9,6 +9,7 @@ import com.phegon.phegonbank.transaction.repo.TransactionRepo;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -56,6 +57,7 @@ public class AuditorServiceImpl implements AuditorService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<TransactionDTO> findTransactionById(Long transactionId) {
         return transactionRepo.findById(transactionId)

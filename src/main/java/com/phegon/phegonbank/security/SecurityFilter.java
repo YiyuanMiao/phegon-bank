@@ -36,7 +36,7 @@ public class SecurityFilter {
                 .cors(Customizer.withDefaults())
                 .exceptionHandling( ex->
                     ex.accessDeniedHandler(customAccessDenialHandler).authenticationEntryPoint(customAuthenticationEntryPoint))
-                .authorizeHttpRequests(req-> req.requestMatchers("/api/auth/**", "/api/roles/**", "/api/register/**").permitAll()
+                .authorizeHttpRequests(req-> req.requestMatchers("/api/auth/**", "/api/roles/**", "/api/register/**", "/profile-picture/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(mag->mag.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);

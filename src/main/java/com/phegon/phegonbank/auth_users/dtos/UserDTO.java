@@ -45,7 +45,7 @@ public class UserDTO {
 
     private List<Role> roles;
 
-    @JsonManagedReference
+    @JsonManagedReference("user-accounts")
     private List<AccountDTO> accounts;
     // when returning a user obj, return the user's accounts and all the fields of that account,
     // except the "user" in the account's field
