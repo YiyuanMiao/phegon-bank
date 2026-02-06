@@ -17,13 +17,15 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ec2-user
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          command_timeout: 30m
           script: |
             cd /home/ec2-user/projects/phegon-bank
-            git pull
-            
             export DOCKER_BUILDKIT=0
             export COMPOSE_DOCKER_CLI_BUILD=0
-            
+            docker system prune -f
+            git pull origin main
+            docker-compose down || true
+        
             docker-compose up --build -d
             
             
